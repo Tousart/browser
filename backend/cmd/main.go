@@ -6,9 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	"github.com/go-chi/chi/v5"
+	"github.com/joho/godotenv"
 	"github.com/tebeka/selenium"
 	"github.com/tebeka/selenium/chrome"
 	ailogic "github.com/tousart/browser/ai_agent/ai_logic"
@@ -22,7 +21,7 @@ const (
 )
 
 func main() {
-	err := godotenv.Load()
+	err := godotenv.Load("../.env")
 	if err != nil {
 		log.Fatalf("failed to download env file: %v", err)
 	}
@@ -52,8 +51,8 @@ func main() {
 			"--disable-dev-shm-usage",
 			"--disable-web-security",
 			"--start-maximized",
-			`--user-data-dir=D:\second_ya_profile`,
-			"--profile-directory=Default",
+			// `--user-data-dir=D:\second_ya_profile`,
+			// "--profile-directory=Default",
 		},
 		Path: yandexBrowserPath,
 	}
@@ -66,7 +65,7 @@ func main() {
 	}
 	defer webDriver.Quit()
 
-	// Сервис с обработкой веб-страниц в браузере
+	// Сервис для обработки веб-страниц яндекс почты
 	mailService := service.CreateMailService(webDriver)
 
 	// ИИ-агент

@@ -31,17 +31,15 @@ func (ms *MailService) Mail() ([]string, error) {
 		return len(elems) > 0, nil
 	}, 15*time.Second)
 	if err != nil {
-		return nil, fmt.Errorf("ошибка ожидания писем: %v", err)
+		return nil, fmt.Errorf("usecase service Mail error: %v", err)
 	}
 
-	// Находим письма
-	// "[data-testid='messages-list_message-item_content']"
 	rows, err := ms.webDriver.FindElements(
 		selenium.ByCSSSelector,
 		"div.qa-MessagesListItemWrap",
 	)
 	if err != nil || len(rows) == 0 {
-		return nil, fmt.Errorf("писем не найдено")
+		return nil, fmt.Errorf("usecase service Mail error")
 	}
 
 	emails := []string{}
