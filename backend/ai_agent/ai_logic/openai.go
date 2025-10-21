@@ -92,7 +92,6 @@ func (ai *AIAgent) emailsToSpam(answer *models.Answer) error {
 	if len(sliceOfEmailsNumbers) == 1 && sliceOfEmailsNumbers[0] == "0" {
 		answer.AIAnswer = "Последние 10 писем не похожи на спам"
 	} else {
-		// TODO отправление писем в спам по номерам
 		answer.AIAnswer = strings.Join(sliceOfEmailsNumbers, ",")
 	}
 
